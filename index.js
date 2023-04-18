@@ -21,8 +21,9 @@ mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
 }).then(() => {
     console.log("DATABASE CONNECTED");
-}).catch(() => {
+}).catch((error) => {
     console.log("FAILED TO CONNECT TO DATABASE");
+    console.log(error);
 });
 
 // using body-parser and cors
@@ -34,7 +35,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-app.use("/api", noteRoutes);
+app.use("/", noteRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "You are at / route" });
