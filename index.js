@@ -33,13 +33,10 @@ const corsOptions = {
     "origin": "*",
     "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
 }
+
 app.use(cors(corsOptions));
 
 app.use("/", noteRoutes);
-
-app.get("/", (req, res) => {
-    res.status(200).json({ message: "You are at / route" });
-})
 
 app.listen(PORT, () => {
     console.log(`app is running on port ${PORT}`);
