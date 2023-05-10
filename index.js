@@ -13,10 +13,11 @@ const username = encodeURIComponent(process.env.DB_USERNAME);
 const password = encodeURIComponent(process.env.PASSWORD);
 const cluster = process.env.CLUSTER;
 
-const dbURL = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
+// const dbURL = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
+const databaseURL = process.env.LOCAL_DATABASE || process.env.MONGODB_URI
 
 // Connecting to Database
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(databaseURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
