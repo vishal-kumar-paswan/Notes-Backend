@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require('dotenv').config();
 const PORT = 8000 || process.env.PORT;
 
 // importing routes
+const authRoutes = require("./routes/auth.js");
 const noteRoutes = require("./routes/note.js");
 
 const username = encodeURIComponent(process.env.DB_USERNAME);
@@ -27,17 +29,17 @@ mongoose.connect(databaseURL, {
     console.log(error);
 });
 
-// using body-parser and cors
+// using body-parser, cookie-parser and cors
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 const corsOptions = {
     "origin": "*",
     "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
 }
-
 app.use(cors(corsOptions));
 
-app.use("/", noteRoutes);
+app.use(authRoutes);
+app.use(noteRoutes);
 
 app.listen(PORT, () => {
     console.log(`app is running on port ${PORT}`);
