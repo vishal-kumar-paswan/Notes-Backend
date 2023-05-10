@@ -1,4 +1,4 @@
-const Note = require("../models/notes");
+const Note = require("../models/note");
 const { validationResult } = require('express-validator');
 
 // Fetch all notes

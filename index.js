@@ -7,7 +7,7 @@ require('dotenv').config();
 const PORT = 8000 || process.env.PORT;
 
 // importing routes
-const noteRoutes = require("./routes/notes.js");
+const noteRoutes = require("./routes/note.js");
 
 const username = encodeURIComponent(process.env.DB_USERNAME);
 const password = encodeURIComponent(process.env.PASSWORD);

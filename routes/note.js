@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { body } = require('express-validator');
-const { addNote, fetchAllNotes, deleteNote, updateNote, readNote } = require("../controllers/notes");
+const { addNote, fetchAllNotes, deleteNote, updateNote, readNote } = require("../controllers/note");
 
 // Routes
 router.get("/fetch-notes", fetchAllNotes);
