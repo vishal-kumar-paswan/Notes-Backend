@@ -1,5 +1,7 @@
 # Notes Backend
 
+[FOLLOWING APIS WONT WORK NOW SINCE IT IS GOING THROUGH DEVELOPMENT STAGE FOR VERSION 2 :)]
+
 Notes application backed by Express.js and MongoDB Atlas.
 
 # API Referenece
