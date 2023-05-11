@@ -1,20 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { body } = require('express-validator');
-const { addNote, fetchAllNotes, deleteNote, updateNote, readNote } = require("../controllers/note");
+const { check } = require('express-validator');
+const { createNote, fetchNotes, deleteNote, updateNote, fetchNote } = require("../controllers/note");
+const { isSignedin } = require("../controllers/auth");
 
 // Routes
-router.get("/fetch-notes", fetchAllNotes);
-router.post("/create-note",
+router.get("/notes/:userId", isSignedin, fetchNotes);
+router.get("/note/:userId/:noteId", isSignedin, fetchNote);
+router.post("/create-note/:userId",
     [
-        body("title", "title does not exists").exists(),
-        body("title", "title is required").isLength({ min: 1 }),
-        body("description", "description does not exists").exists(),
-        body("description", "description is required").isLength({ min: 1 })
-    ]
-    , addNote);
-router.get("/read-note/:noteId", readNote);
-router.put("/update-note/:noteId", updateNote);
-router.delete("/delete-note/:noteId", deleteNote);
+        check("title", "title is required").isLength({ min: 1 }),
+        check("title", "title does not exists").exists(),
+        check("description", "description does not exists").exists(),
+        check("description", "description is required").isLength({ min: 1 })
+    ],
+    isSignedin, createNote
+);
+router.put("/update-note/:userId/:noteId", isSignedin, updateNote);
+router.delete("/delete-note/:userId/:noteId", isSignedin, deleteNote);
 
 module.exports = router;
