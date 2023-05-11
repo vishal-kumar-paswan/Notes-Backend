@@ -9,6 +9,7 @@ const PORT = 8000 || process.env.PORT;
 
 // importing routes
 const authRoutes = require("./routes/auth.js");
+const userRoutes = require("./routes/user.js");
 const noteRoutes = require("./routes/note.js");
 
 const username = encodeURIComponent(process.env.DB_USERNAME);
@@ -39,6 +40,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(authRoutes);
+app.use(userRoutes);
 app.use(noteRoutes);
 
 app.listen(PORT, () => {
