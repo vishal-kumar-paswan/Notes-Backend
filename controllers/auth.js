@@ -61,13 +61,13 @@ exports.signin = async (req, res) => {
         // Checking if password is correct or not
         if (user.authenticate(password)) {
 
-            const { name, bio } = user;
+            const { _id, name, bio } = user;
             // Generating token using user email
             const token = jsonWebToken.sign({ email: email }, process.env.SECRET);
             // Setting cookie with the token that will expire after one day
             res.cookie("token", token, { expire: new Date() + 1 });
 
-            return res.status(202).json({ name: name, email: email, bio: bio });
+            return res.status(202).json({ _id: _id, name: name, email: email, bio: bio });
         }
         return res.status(403).json({ error: "Password is incorrect" });
     } catch (error) {
