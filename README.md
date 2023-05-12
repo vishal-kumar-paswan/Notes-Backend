@@ -137,7 +137,7 @@ Make a DELETE request at the endpoint `/delete-note/:userId/:noteId`
 
 ## 7. Fetch all notes
 
-Make a POST request at the endpoint `/notes/:userId`
+Make a GET request at the endpoint `/notes/:userId`
 
 ### Response Body
 
