@@ -65,7 +65,7 @@ exports.signin = async (req, res) => {
             // Generating token using user email
             const token = jsonWebToken.sign({ email: email }, process.env.SECRET);
             // Setting cookie with the token that will expire after one day
-            res.cookie("token", token, { expire: new Date() + 1 });
+            res.cookie("token_id", token, { expire: new Date() + 1 });
 
             return res.status(202).json({ _id: _id, name: name, email: email, bio: bio });
         }
@@ -78,13 +78,13 @@ exports.signin = async (req, res) => {
 // Check if user is signed in
 exports.isSignedin = expressjwt({
     secret: 'SECRET',
-    algorithms: ["HS256"],
+    algorithms: ["RS256"],
     userProperty: "auth",
 });
 
 // Signout user
 exports.signout = async (req, res) => {
     // Clearing cookie
-    res.clearCookie("token");
+    res.clearCookie("token_id");
     return res.status(205).json({ message: "User signed out" });
 }
