@@ -77,7 +77,7 @@ exports.signin = async (req, res) => {
 
 // Check if user is signed in
 exports.isSignedin = expressjwt({
-    secret: 'SECRET',
+    secret: process.env.SECRET,
     algorithms: ["HS256"],
     userProperty: "auth",
 });
