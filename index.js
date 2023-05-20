@@ -17,25 +17,25 @@ const password = encodeURIComponent(process.env.PASSWORD);
 const cluster = process.env.CLUSTER;
 
 // const dbURL = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
-const databaseURL = process.env.LOCAL_DATABASE || process.env.MONGODB_URI
+const databaseURL = process.env.LOCAL_DATABASE || process.env.MONGODB_URI;
 
 // Connecting to Database
 mongoose.connect(databaseURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 }).then(() => {
-    console.log("DATABASE CONNECTED");
+  console.log("-> DATABASE CONNECTED");
 }).catch((error) => {
-    console.log("FAILED TO CONNECT TO DATABASE");
-    console.log(error);
+  console.log("-> FAILED TO CONNECT TO DATABASE");
+  console.log(error);
 });
 
 // using body-parser, cookie-parser and cors
 app.use(bodyParser.json());
 app.use(cookieParser());
 const corsOptions = {
-    "origin": "*",
-    "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
+  "origin": "*",
+  "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
 }
 app.use(cors(corsOptions));
 
@@ -74,5 +74,5 @@ const rootDescription = `
 app.get("/", (req, res) => res.send(rootDescription));
 
 app.listen(PORT, () => {
-    console.log(`app is running on port ${PORT}`);
+  console.log(`-> app is running on port ${PORT}`);
 })
