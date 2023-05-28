@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require('dotenv').config();
+const path = require("path");
 const PORT = 8000 || process.env.PORT;
 
 // importing routes
@@ -43,35 +44,7 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use(noteRoutes);
 
-const rootDescription = `
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Notes Backend</title>
-    </head>
-    <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-      <h1>Notes Backend Server</h1>
-      <h3>
-        Developed by
-        <a href="https://github.com/vishal-kumar-paswan">Vishal Kumar Paswan</a>
-      </h3>
-      <h3>
-        Visit the
-        <a href="https://github.com/vishal-kumar-paswan/Notes-Backend"
-          >GitHub</a
-        >
-        repository for API reference
-      </h3>
-    </body>
-  </html>
-</html>
-
-`
-
-app.get("/", (req, res) => res.send(rootDescription));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/pages/index.html')));
 
 app.listen(PORT, () => {
   console.log(`-> app is running on port ${PORT}`);
