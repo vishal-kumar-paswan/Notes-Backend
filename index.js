@@ -18,13 +18,10 @@ const password = encodeURIComponent(process.env.PASSWORD);
 const cluster = process.env.CLUSTER;
 
 // const dbURL = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
-const databaseURL = process.env.LOCAL_DATABASE || process.env.MONGODB_URI;
+const databaseURL = process.env.MONGODB_URI || process.env.LOCAL_DATABASE;
 
 // Connecting to Database
-mongoose.connect(databaseURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(databaseURL).then(() => {
   console.log("-> DATABASE CONNECTED");
 }).catch((error) => {
   console.log("-> FAILED TO CONNECT TO DATABASE");
@@ -45,6 +42,7 @@ app.use(userRoutes);
 app.use(noteRoutes);
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/pages/index.html')));
+app.get("/test", (req, res) => res.status(200).json({"message": "API is working fine"}));
 
 app.listen(PORT, () => {
   console.log(`-> app is running on port ${PORT}`);
