@@ -12,7 +12,7 @@ router.post("/create-note/:userId",
         check("title", "title is required").isLength({ min: 1 }),
         check("title", "title does not exists").exists(),
         check("description", "description does not exists").exists(),
-        check("description", "description is required").exists())
+        check("description", "description is required").exists(),
     ],
     isSignedin, createNote
 );
