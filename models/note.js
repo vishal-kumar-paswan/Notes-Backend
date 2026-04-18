@@ -5,7 +5,7 @@ const noteSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        maxLength: 30,
+        maxLength: 100,
         trim: true
     },
     description: {
